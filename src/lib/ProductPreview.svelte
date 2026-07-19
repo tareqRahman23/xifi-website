@@ -1,5 +1,6 @@
 <script>
   import Icon from './Icon.svelte';
+  import { liquidGlass, parallax } from './interactions.js';
   const assetBase = `${import.meta.env.BASE_URL}assets/`;
 
   const sources = [
@@ -11,12 +12,13 @@
   let sent = false;
 </script>
 
-<div class="preview-wrap" aria-label="Interactive XIFI support session preview">
-  <aside class="glass source-panel">
+<div class="preview-wrap" aria-label="Interactive XIFI support session preview" use:liquidGlass={{ defaults: { refraction: 0.34, edgeHighlight: 0.13, chromAberration: 0.018, shadowOpacity: 0.18 } }} use:parallax={{ strength: 0.72, scrollStrength: 0.7 }}>
+  <div class="liquidglass-scene preview-glass-scene" aria-hidden="true"></div>
+  <aside class="glass source-panel" data-liquid-glass data-config={JSON.stringify({ blurAmount: 0.18, cornerRadius: 22, zRadius: 18, brightness: 0.08 })}>
     <div class="panel-title"><span class="icon-disc"><Icon name="book" size={17} /></span>Approved knowledge</div>
     <div class="source-list">
       {#each sources as source, index}
-        <button class:active={selected === index} on:click={() => selected = index}>
+        <button data-interactive class:active={selected === index} on:click={() => selected = index}>
           <span><strong>{source.title}</strong><small>{source.detail}</small></span>
           <span class="mini-check"><Icon name="check" size={15} /></span>
         </button>
@@ -25,7 +27,7 @@
     <span class="panel-link">View source library <Icon name="arrow" size={14} /></span>
   </aside>
 
-  <section class="glass conversation">
+  <section class="glass conversation" data-liquid-glass data-config={JSON.stringify({ blurAmount: 0.22, cornerRadius: 27, zRadius: 22, brightness: 0.08 })}>
     <div class="conversation-top">
       <span class="live"><i></i> Live support</span>
       <span class="handoff-tag"><Icon name="people" size={14} /> Human handoff ready</span>
@@ -53,7 +55,7 @@
     </div>
   </section>
 
-  <aside class="glass action-panel">
+  <aside class="glass action-panel" data-liquid-glass data-config={JSON.stringify({ blurAmount: 0.18, cornerRadius: 22, zRadius: 18, brightness: 0.08 })}>
     <div class="panel-title"><span class="icon-disc success"><Icon name="check" size={17} /></span>Action confirmed</div>
     <div class="action-body">
       <div class="action-head"><strong>Duplicate charge refund</strong><span>Completed</span></div>

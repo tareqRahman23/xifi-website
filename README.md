@@ -4,6 +4,8 @@ Responsive Svelte/Vite marketing website for XIFI, based on the supplied landing
 
 Live site: https://tareqrahman23.github.io/xifi-website/
 
+The interface uses `@ybouane/liquidglass` for targeted WebGL refraction and a lightweight local motion layer for parallax, pointer lighting, scroll reveals, and reduced-motion fallbacks.
+
 ## Run locally
 
 ```powershell
