@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import Icon from './lib/Icon.svelte';
   import Logo from './lib/Logo.svelte';
   import ProductPreview from './lib/ProductPreview.svelte';
@@ -12,8 +13,35 @@
   let pilotOpen = false;
   let submitted = false;
   let email = '';
+  const heroPhrase = 'always ready';
+  let typedHeroPhrase = '';
+  let typingComplete = false;
   const openPilot = () => { pilotOpen = true; submitted = false; };
   const submitPilot = () => { if (email.trim()) submitted = true; };
+
+  onMount(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      typedHeroPhrase = heroPhrase;
+      typingComplete = true;
+      return;
+    }
+
+    let character = 0;
+    let timer;
+    const typeNextCharacter = () => {
+      character += 1;
+      typedHeroPhrase = heroPhrase.slice(0, character);
+      if (character < heroPhrase.length) {
+        timer = window.setTimeout(typeNextCharacter, 78);
+      } else {
+        typingComplete = true;
+      }
+    };
+
+    timer = window.setTimeout(typeNextCharacter, 420);
+    return () => window.clearTimeout(timer);
+  });
 </script>
 
 <svelte:head>
@@ -37,7 +65,16 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-field" use:parallax={{ strength: .42, scrollStrength: .3 }}>
         <div class="hero-copy">
-          <h1 id="hero-title">Tech support that is<br /><span>always ready</span> to help.</h1>
+          <h1 id="hero-title" aria-label="Tech support that is always ready to help.">
+            Tech support that is<br />
+            <span class="hero-title-line" aria-hidden="true">
+              <span class:typing-complete={typingComplete} class="typewriter">
+                <span class="typewriter-reserve">{heroPhrase}</span>
+                <span class="typewriter-text">{typedHeroPhrase}</span>
+              </span>
+              to help.
+            </span>
+          </h1>
           <p>Deliver instant, intelligent assistance across common IT issues — without adding pressure to your support team.</p>
           <div class="hero-actions">
             <LiquidButton label="Ask for a demo" onpress={openPilot} />
