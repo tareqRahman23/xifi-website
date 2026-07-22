@@ -1,7 +1,4 @@
-<script>
-  import Logo from './Logo.svelte';
-</script>
-
+<script>import Logo from './Logo.svelte';</script>
 <footer>
   <div class="footer-grid">
     <div class="footer-brand"><Logo /><p>Grounded answers.<br />Approved actions.<br />Human when it matters.</p></div>

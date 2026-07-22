@@ -11,8 +11,8 @@
 
 <style>
   .logo { display: inline-flex; align-items: center; gap: .72rem; text-decoration: none; color: #10122f; }
-  .logo-mark { width: 50px; height: 44px; object-fit: contain; flex: none; filter: drop-shadow(0 9px 16px rgba(47,99,245,.22)); }
+  .logo-mark { width: 38px; height: 34px; object-fit: contain; flex: none; filter: drop-shadow(0 7px 13px rgba(205,52,120,.18)); }
   .wordmark { font-family: 'Sora', sans-serif; font-size: 1.45rem; font-weight: 600; letter-spacing: -.06em; font-style: italic; }
   .light { color: white; }
-  .compact .logo-mark { width: 43px; height: 38px; }
+  .compact .logo-mark { width: 36px; height: 32px; }
 </style>

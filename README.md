@@ -4,7 +4,7 @@ Responsive Svelte/Vite marketing website for XIFI, based on the supplied landing
 
 Live site: https://tareqrahman23.github.io/xifi-website/
 
-The interface uses `@ybouane/liquidglass` for targeted WebGL refraction and a lightweight local motion layer for parallax, pointer lighting, scroll reveals, and reduced-motion fallbacks.
+The interface uses a restrained Svelte liquid-glass button adapted from [`danilofiumi/liquid-glass-svelte`](https://github.com/danilofiumi/liquid-glass-svelte), plus a lightweight local motion layer for subtle parallax, scroll reveals, and reduced-motion fallbacks.
 
 ## Run locally
 
@@ -28,12 +28,12 @@ The production bundle is written to `dist/`.
 
 - Heading type: Sora SemiBold
 - Body type: Inter
-- XIFI Blue Light: `#68BEFF`
-- XIFI Blue: `#2F63F5`
-- Deep Indigo: `#0E088C`
-- Accent Magenta: `#F1065A`
-- Soft Mist: `#ECEEF3`
-- Graphite: `#5A5A5A`
+- Support Pink: `#DF4C8D`
+- Deep Rose: `#CB3478`
+- Soft Pink: `#F9D4E8`
+- Deep Navy: `#11132F`
+- Signal Blue: `#4168EE`
+- Cool Mist: `#EEF2F8`
 - White: `#FFFFFF`
 
 The generated design concepts are stored under `design/`. Production UI remains code-native. Generated avatar assets are stored under `public/assets/`.
