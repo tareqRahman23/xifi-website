@@ -20,7 +20,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; min-width: 320px; min-height: 100vh; background: #eef2f8; }
+body { margin: 0; min-width: 320px; min-height: 100vh; background: #fff; }
 button, input, textarea { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { cursor: pointer; }
@@ -29,8 +29,8 @@ p { color: var(--muted); line-height: 1.55; }
 h1, h2, h3, strong { font-family: 'Sora', sans-serif; }
 button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid rgba(223,76,141,.35); outline-offset: 3px; }
 
-main { padding: 26px; overflow: hidden; }
-.site-shell { max-width: 1480px; margin: 0 auto; overflow: hidden; background: white; border: 1px solid rgba(255,255,255,.95); border-radius: 28px; box-shadow: 0 24px 90px rgba(25,45,100,.13); }
+main { padding: 0; overflow: hidden; }
+.site-shell { width: 100%; margin: 0; overflow: hidden; background: white; border: 0; border-radius: 0; box-shadow: none; }
 .section-pad { padding: 116px 72px; }
 .centered { text-align: center; }
 .section-heading h2, .capability-copy h2, .human-copy h2 { margin: 0; font-size: clamp(2rem, 3.5vw, 3.45rem); line-height: 1.08; letter-spacing: -.06em; }
