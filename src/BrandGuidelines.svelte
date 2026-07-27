@@ -9,6 +9,7 @@
   const homeUrl = baseUrl;
   const logoUrl = `${baseUrl}assets/xifi-logo.svg`;
   const pngUrl = `${baseUrl}assets/xifi-app-icon.png`;
+  const pdfUrl = `${baseUrl}assets/XIFI-Brand-Guidelines-v1.0.pdf`;
 
   let menuOpen = false;
   let copied = '';
@@ -104,13 +105,14 @@
   <nav class="brand-nav" aria-label="Brand guidelines navigation">
     <Logo href={homeUrl} />
     <div class:open={menuOpen} class="brand-nav-links">
-      <a href="#foundation" onclick={() => menuOpen = false}>Foundation</a>
+      <a href="#foundation" onclick={() => menuOpen = false}>Identity</a>
       <a href="#mark" onclick={() => menuOpen = false}>Mark</a>
-      <a href="#system" onclick={() => menuOpen = false}>System</a>
-      <a href="#expression" onclick={() => menuOpen = false}>Expression</a>
-      <a href="#use" onclick={() => menuOpen = false}>Use</a>
+      <a href="#system" onclick={() => menuOpen = false}>Color & type</a>
+      <a href="#expression" onclick={() => menuOpen = false}>Voice</a>
+      <a href="#use" onclick={() => menuOpen = false}>Applications</a>
+      <a class="brand-nav-pdf" href={pdfUrl} download>Download PDF</a>
     </div>
-    <a class="brand-home-link" href={homeUrl}>Visit XIFI <Icon name="arrow" size={15} /></a>
+    <a class="brand-home-link" href={pdfUrl} download>PDF <Icon name="download" size={15} /></a>
     <button class="brand-menu-button" aria-label="Toggle navigation" aria-expanded={menuOpen} onclick={() => menuOpen = !menuOpen}>
       <Icon name={menuOpen ? 'close' : 'menu'} />
     </button>
@@ -119,13 +121,9 @@
   <main>
     <section class="brand-hero" aria-labelledby="brand-hero-title">
       <div class="brand-hero-copy">
-        <div class="chapter-line"><span>Brand system</span><span>Version 1.0 — 2026</span></div>
-        <h1 id="brand-hero-title">Intelligence<br /><em>in motion.</em></h1>
-        <p>XIFI turns customer intent into a grounded answer, an approved action, or a context-rich human handoff. The identity follows the same logic: clear, controlled, and always moving forward.</p>
-        <div class="brand-hero-actions">
-          <a class="brand-button brand-button-primary" href="#foundation">Explore the system <Icon name="arrow" size={16} /></a>
-          <a class="brand-text-link" href={homeUrl}>Return to the product</a>
-        </div>
+        <div class="chapter-line"><span>XIFI / Brand guidelines</span><span>Version 1.0 — 2026</span></div>
+        <h1 id="brand-hero-title">Brand<br />system</h1>
+        <p class="brand-hero-tagline"><span>Intelligence</span> <em>in motion.</em></p>
       </div>
 
       <div class="hero-mark-stage" aria-hidden="true">
@@ -303,6 +301,7 @@
       <div class="asset-bar brand-reveal">
         <div><span>Core assets</span><h3>Start with the source.</h3><p>Use the supplied files without redrawing, tracing, or applying additional effects.</p></div>
         <div class="asset-actions">
+          <a class="brand-button brand-button-primary" href={pdfUrl} download>Download PDF <Icon name="download" size={16} /></a>
           <a class="brand-button brand-button-primary" href={logoUrl} download>Download SVG <Icon name="download" size={16} /></a>
           <a class="brand-button brand-button-secondary" href={pngUrl} download>Download PNG <Icon name="download" size={16} /></a>
         </div>
