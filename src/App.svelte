@@ -13,6 +13,7 @@
   let pilotOpen = false;
   let submitted = false;
   let email = '';
+  const brandGuidelinesUrl = `${import.meta.env.BASE_URL}branding-guidelines/`;
   const phrase = 'rebuilt for AI.';
   let typedPhrase = '';
   let typingComplete = false;
@@ -168,6 +169,7 @@
       <a href="#product" onclick={() => menuOpen = false}>Platform</a>
       <a href="#model" onclick={() => menuOpen = false}>Why XIFI</a>
       <a href="#experience" onclick={() => menuOpen = false}>Experience</a>
+      <a href={brandGuidelinesUrl} onclick={() => menuOpen = false}>Brand guidelines</a>
       <a href="#pilot" onclick={() => menuOpen = false}>Pilot</a>
     </div>
     <button class="button button-primary nav-cta" onclick={openPilot}>Design your pilot <Icon name="arrow" size={16} /></button>
@@ -246,7 +248,7 @@
     <div class="footer-brand"><Logo /><p>AI-native contact-center infrastructure for modern customer operations.</p></div>
     <div><strong>Platform</strong><a href="#product">Service layers</a><a href="#model">Operating model</a><a href="#experience">Experience</a></div>
     <div><strong>Use cases</strong><a href="#pilot">Selected queues</a><a href="#pilot">Guided resolution</a><a href="#pilot">Human handoff</a></div>
-    <div><strong>Company</strong><a href="#pilot">Pilot program</a><a href="mailto:hello@getxifi.com">Contact</a><a href="#top">Back to top</a></div>
+    <div><strong>Company</strong><a href="#pilot">Pilot program</a><a href={brandGuidelinesUrl}>Brand guidelines</a><a href="mailto:hello@getxifi.com">Contact</a><a href="#top">Back to top</a></div>
     <div class="footer-note"><strong>Product status</strong><p>XIFI is currently offered through selected, scoped pilot engagements.</p></div>
     <div class="footer-bottom"><span>© 2026 XIFI. All rights reserved.</span><span>Simple. Controlled. Connected.</span></div>
   </footer>

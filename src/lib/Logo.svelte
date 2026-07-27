@@ -1,10 +1,11 @@
 <script>
   export let light = false;
   export let compact = false;
+  export let href = '#top';
   const logoUrl = `${import.meta.env.BASE_URL}assets/xifi-logo.svg`;
 </script>
 
-<a class:light class:compact class="logo" href="#top" aria-label="XIFI home">
+<a class:light class:compact class="logo" {href} aria-label="XIFI home">
   <img class="logo-mark" src={logoUrl} alt="" aria-hidden="true" />
   {#if !compact}<span class="wordmark">xifi</span>{/if}
 </a>
