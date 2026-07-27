@@ -55,6 +55,21 @@
     <path d="m9 12 2 2 4-4" />
   {:else if name === 'wave'}
     <path d="M3 12h2l2-5 3 10 3-14 3 9h5" />
+  {:else if name === 'channels'}
+    <path d="M7 4h10a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3h-5l-4 4v-4H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Z" />
+    <path d="M8 9h8M8 12h5" />
+  {:else if name === 'route'}
+    <circle cx="6" cy="5" r="2" /><circle cx="18" cy="19" r="2" />
+    <path d="M8 5h3a3 3 0 0 1 3 3v8a3 3 0 0 0 3 3M14 10l-3 3-3-3" />
+  {:else if name === 'brain'}
+    <path d="M9.5 4A3.5 3.5 0 0 0 6 7.5v.3A3.5 3.5 0 0 0 5 14.5 3.5 3.5 0 0 0 9.5 20H12V4H9.5Z" />
+    <path d="M14.5 4A3.5 3.5 0 0 1 18 7.5v.3a3.5 3.5 0 0 1 1 6.7 3.5 3.5 0 0 1-4.5 5.5H12V4h2.5ZM8 9h4M12 15h4" />
+  {:else if name === 'headset'}
+    <path d="M4 14v-2a8 8 0 0 1 16 0v2" /><path d="M6 13H4a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h2v-7ZM18 13h2a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2v-7ZM18 20c0 1.1-.9 2-2 2h-3" />
+  {:else if name === 'chart'}
+    <path d="M4 20V10M10 20V4M16 20v-7M22 20H2" />
+  {:else if name === 'layers'}
+    <path d="m12 2 9 5-9 5-9-5 9-5Z" /><path d="m3 12 9 5 9-5M3 17l9 5 9-5" />
   {:else}
     <circle cx="12" cy="12" r="9" />
   {/if}

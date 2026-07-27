@@ -5,25 +5,38 @@
   import Icon from './lib/Icon.svelte';
   import Logo from './lib/Logo.svelte';
   import GlassConsole from './lib/GlassConsole.svelte';
-  import FeatureBento from './lib/FeatureBento.svelte';
-  import SolutionsRail from './lib/SolutionsRail.svelte';
+  import PlatformFlow from './lib/PlatformFlow.svelte';
+  import CcaasShift from './lib/CcaasShift.svelte';
   import WorkflowStack from './lib/WorkflowStack.svelte';
-  import { reveal } from './lib/interactions.js';
+  import { liquidGlass } from './lib/liquidGlass.js';
 
   let menuOpen = false;
   let pilotOpen = false;
   let submitted = false;
   let email = '';
-  const phrase = 'always ready.';
+  const phrase = 'rebuilt for AI.';
   let typedPhrase = '';
   let typingComplete = false;
 
+  const capabilities = [
+    ['channels', 'Voice + digital'],
+    ['route', 'Routing + queues'],
+    ['brain', 'Knowledge + reasoning'],
+    ['shield', 'Approved actions'],
+    ['headset', 'Human operations'],
+    ['chart', 'Quality + insight']
+  ];
+
   const openPilot = () => { pilotOpen = true; submitted = false; };
+  const closePilot = () => { pilotOpen = false; };
   const submitPilot = () => { if (email.trim()) submitted = true; };
 
   onMount(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let typeTimer;
+    const onKeydown = (event) => { if (event.key === 'Escape') closePilot(); };
+    window.addEventListener('keydown', onKeydown);
+
     if (reduced) {
       typedPhrase = phrase;
       typingComplete = true;
@@ -32,166 +45,238 @@
       const type = () => {
         index += 1;
         typedPhrase = phrase.slice(0, index);
-        if (index < phrase.length) typeTimer = window.setTimeout(type, 72);
+        if (index < phrase.length) typeTimer = window.setTimeout(type, 66);
         else typingComplete = true;
       };
-      typeTimer = window.setTimeout(type, 550);
+      typeTimer = window.setTimeout(type, 480);
     }
 
     if (!reduced) {
       gsap.registerPlugin(ScrollTrigger);
       const context = gsap.context(() => {
-        gsap.timeline({ defaults: { ease: 'power3.out' } })
-          .from('.floating-nav', { y: -24, opacity: 0, duration: .8 })
-          .from('.hero-copy > *', { y: 34, opacity: 0, duration: .85, stagger: .1 }, '-=.45')
-          .from('.console-wrap', { x: 54, scale: .92, opacity: 0, duration: 1.05 }, '-=.78');
+        gsap.timeline({ defaults: { ease: 'power4.out' } })
+          .from('.floating-nav', { y: -28, opacity: 0, duration: 0.9 })
+          .from('.hero-overline, .hero-copy h1, .hero-copy > p', { y: 42, opacity: 0, duration: 0.9, stagger: 0.09 }, '-=0.48')
+          .from('.hero-actions, .hero-proof', { y: 22, opacity: 0, duration: 0.72, stagger: 0.1 }, '-=0.54')
+          .from('.console-wrap', { x: 70, rotateY: -7, scale: 0.9, opacity: 0, duration: 1.15 }, '-=0.95')
+          .from('.capability-item', { y: 18, opacity: 0, duration: 0.65, stagger: 0.07 }, '-=0.5');
 
-        gsap.utils.toArray('.media-scale').forEach((element) => {
-          gsap.fromTo(element, { scale: .82, opacity: .28 }, {
-            scale: 1,
-            opacity: 1,
-            ease: 'none',
-            scrollTrigger: { trigger: element, start: 'top 92%', end: 'top 42%', scrub: true }
+        gsap.to('.hero-copy', {
+          yPercent: 12,
+          opacity: 0.3,
+          ease: 'none',
+          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 28%', scrub: true }
+        });
+        gsap.to('.console-wrap', {
+          yPercent: -8,
+          rotateZ: 0.8,
+          ease: 'none',
+          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom 20%', scrub: true }
+        });
+        gsap.to('.page-progress', {
+          scaleX: 1,
+          ease: 'none',
+          scrollTrigger: { start: 0, end: 'max', scrub: 0.25 }
+        });
+
+        gsap.utils.toArray('.reveal-copy').forEach((element) => {
+          gsap.from(element, {
+            y: 42,
+            opacity: 0,
+            duration: 0.88,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: element, start: 'top 86%', once: true }
           });
+        });
+
+        gsap.from('.flow-layer', {
+          y: 58,
+          opacity: 0,
+          duration: 0.9,
+          stagger: 0.12,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: '.platform-flow', start: 'top 78%', once: true }
+        });
+        gsap.from('.flow-connector', {
+          scale: 0,
+          opacity: 0,
+          duration: 0.5,
+          stagger: 0.13,
+          ease: 'back.out(1.8)',
+          scrollTrigger: { trigger: '.platform-flow', start: 'top 70%', once: true }
+        });
+
+        gsap.from('.shift-card', {
+          clipPath: 'inset(0 50% 0 50% round 28px)',
+          opacity: 0,
+          duration: 1.1,
+          stagger: 0.18,
+          ease: 'power4.inOut',
+          scrollTrigger: { trigger: '.shift-grid', start: 'top 78%', once: true }
         });
 
         const cards = gsap.utils.toArray('.workflow-card');
         cards.forEach((card, index) => {
-          gsap.fromTo(card, { scale: .9, opacity: .45 }, {
+          gsap.fromTo(card, { scale: 0.9, opacity: 0.35 }, {
             scale: 1,
             opacity: 1,
             ease: 'none',
-            scrollTrigger: { trigger: card, start: 'top 88%', end: 'top 46%', scrub: true }
+            scrollTrigger: { trigger: card, start: 'top 90%', end: 'top 46%', scrub: true }
           });
           if (index < cards.length - 1) {
             gsap.to(card, {
-              scale: .94,
-              opacity: .5,
+              scale: 0.945,
+              opacity: 0.46,
               ease: 'none',
-              scrollTrigger: { trigger: cards[index + 1], start: 'top 75%', end: 'top 34%', scrub: true }
+              scrollTrigger: { trigger: cards[index + 1], start: 'top 76%', end: 'top 35%', scrub: true }
             });
           }
         });
+
+        gsap.to('.cta-glow', {
+          xPercent: 44,
+          rotate: 18,
+          ease: 'none',
+          scrollTrigger: { trigger: '.cta-section', start: 'top bottom', end: 'bottom top', scrub: true }
+        });
       });
-      return () => { window.clearTimeout(typeTimer); context.revert(); };
+
+      return () => {
+        window.clearTimeout(typeTimer);
+        window.removeEventListener('keydown', onKeydown);
+        context.revert();
+      };
     }
-    return () => window.clearTimeout(typeTimer);
+
+    return () => {
+      window.clearTimeout(typeTimer);
+      window.removeEventListener('keydown', onKeydown);
+    };
   });
 </script>
 
 <svelte:head>
-  <title>XIFI | Intelligent frontline support</title>
-  <meta name="description" content="XIFI delivers grounded AI assistance, approved actions, and context-rich human handoff for modern support teams." />
+  <title>XIFI | The contact center, rebuilt for AI</title>
+  <meta name="description" content="XIFI is an AI-native contact-center platform designed to replace the traditional CCaaS operating model with first-party services for channels, orchestration, knowledge, actions, handoff, quality, and operations." />
 </svelte:head>
 
-<main id="top">
-  <div class="ambient ambient-one"></div>
-  <div class="ambient ambient-two"></div>
+<svg class="liquid-defs" aria-hidden="true" width="0" height="0">
+  <filter id="xifi-liquid-refraction" x="-30%" y="-30%" width="160%" height="160%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.012 0.019" numOctaves="2" seed="41" result="noise" />
+    <feGaussianBlur in="noise" stdDeviation="1.2" result="softNoise" />
+    <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="26" xChannelSelector="R" yChannelSelector="B" />
+  </filter>
+</svg>
 
-  <nav class="floating-nav" aria-label="Main navigation">
+<div class="page-progress" aria-hidden="true"></div>
+
+<main id="top">
+  <nav class="floating-nav" aria-label="Main navigation" use:liquidGlass={{ size: 220 }}>
     <Logo />
     <div class:open={menuOpen} class="nav-links">
-      <a href="#product" on:click={() => menuOpen = false}>Product</a>
-      <a href="#solutions" on:click={() => menuOpen = false}>Solutions</a>
-      <a href="#platform" on:click={() => menuOpen = false}>Platform</a>
-      <a href="#integrations" on:click={() => menuOpen = false}>Integrations</a>
+      <a href="#product" onclick={() => menuOpen = false}>Platform</a>
+      <a href="#model" onclick={() => menuOpen = false}>Why XIFI</a>
+      <a href="#experience" onclick={() => menuOpen = false}>Experience</a>
+      <a href="#pilot" onclick={() => menuOpen = false}>Pilot</a>
     </div>
-    <button class="button button-primary nav-cta" on:click={openPilot}>Ask for a demo <Icon name="arrow" size={16} /></button>
-    <button class="menu-button" on:click={() => menuOpen = !menuOpen} aria-label="Toggle menu" aria-expanded={menuOpen}>
+    <button class="button button-primary nav-cta" onclick={openPilot} use:liquidGlass={{ size: 120 }}>Design your pilot <Icon name="arrow" size={16} /></button>
+    <button class="menu-button" onclick={() => menuOpen = !menuOpen} aria-label="Toggle menu" aria-expanded={menuOpen}>
       <Icon name={menuOpen ? 'close' : 'menu'} />
     </button>
   </nav>
 
   <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-backdrop" aria-hidden="true"><i></i><i></i></div>
     <div class="hero-copy">
-      <h1 id="hero-title" aria-label="Tech support, always ready.">
-        Tech support,
+      <span class="hero-overline">AI-native contact-center platform</span>
+      <h1 id="hero-title" aria-label="The contact center, rebuilt for AI.">
+        The contact center,
         <span class="typed-line" aria-hidden="true">
           <span class:typing-complete={typingComplete} class="typewriter">
-            <span class="typewriter-reserve">{phrase}</span>
             <span class="typewriter-text">{typedPhrase}</span>
           </span>
         </span>
       </h1>
-      <p>Deliver instant, intelligent assistance across common support issues—grounded in your knowledge, controlled by your policies, and ready to hand off.</p>
+      <p>One system for voice, digital channels, intelligent routing, approved knowledge, controlled actions, human handoff, quality, and operations.</p>
       <div class="hero-actions">
-        <button class="button button-primary" on:click={openPilot}>Ask for a demo <Icon name="arrow" size={17} /></button>
-        <a class="button button-secondary" href="#product"><Icon name="play" size={17} /> See how it works</a>
+        <button class="button button-primary" onclick={openPilot} use:liquidGlass={{ size: 135 }}>Design your pilot <Icon name="arrow" size={17} /></button>
+        <a class="text-link" href="#product"><Icon name="play" size={18} /> See the platform in action</a>
       </div>
-      <div class="trust-note"><span></span> Grounded answers. Approved actions. Human when it matters.</div>
-    </div>
-    <div class="console-wrap media-scale"><GlassConsole /></div>
-  </section>
-
-  <section class="section product-section" id="product" use:reveal>
-    <div class="section-intro">
-      <h2>AI assistance where it counts.</h2>
-      <p>One support layer coordinates conversation, knowledge, action, and escalation without losing control.</p>
-    </div>
-    <FeatureBento />
-  </section>
-
-  <section class="integration-band" id="integrations" aria-label="Integration partners">
-    <p>Built to meet your existing stack.</p>
-    <div class="marquee-mask">
-      <div class="marquee-track">
-        {#each ['Salesforce', 'Zendesk', 'HubSpot', 'Freshdesk', 'ServiceNow', 'Microsoft Dynamics', 'Salesforce', 'Zendesk', 'HubSpot', 'Freshdesk', 'ServiceNow', 'Microsoft Dynamics'] as partner}
-          <span>{partner}</span>
-        {/each}
+      <div class="hero-proof">
+        <span><Icon name="layers" size={16} /> First-party services</span>
+        <span><Icon name="shield" size={16} /> Policy controlled</span>
+        <span><Icon name="people" size={16} /> Human in the loop</span>
       </div>
     </div>
+    <div class="console-wrap"><GlassConsole /></div>
   </section>
 
-  <section class="section solutions-section" id="solutions" use:reveal>
-    <div class="section-intro split-intro">
-      <h2>An intelligent frontline,<br />built around your business.</h2>
-      <p>Shape the support journey around your knowledge, permissions, systems, and people.</p>
+  <section class="capability-rail" aria-label="XIFI platform capabilities">
+    {#each capabilities as capability}
+      <div class="capability-item"><Icon name={capability[0]} size={20} /><span>{capability[1]}</span></div>
+    {/each}
+  </section>
+
+  <section class="section platform-section" id="product">
+    <div class="statement reveal-copy">
+      <span class="section-kicker">Built different</span>
+      <h2>Not another <em>bot on top</em> of your CCaaS.</h2>
+      <p>Traditional CCaaS moved the contact center to the cloud. XIFI is designed for the next shift: an AI-native operating model that connects the interaction from first contact to final resolution.</p>
     </div>
-    <SolutionsRail />
+    <PlatformFlow />
   </section>
 
-  <section class="section workflow-section" id="platform">
-    <div class="workflow-heading" use:reveal>
-      <h2>Great automation knows<br />when to bring in a person.</h2>
-      <p>Every answer is grounded. Every action is controlled. Every handoff arrives with context intact.</p>
+  <section class="section model-section" id="model">
+    <div class="section-heading reveal-copy">
+      <span class="section-kicker">A new operating model</span>
+      <h2>From fragmented CCaaS to one intelligent platform.</h2>
+      <p>XIFI coordinates the session while bounded services own the capabilities that need to scale, fail, and evolve independently.</p>
+    </div>
+    <CcaasShift />
+  </section>
+
+  <section class="section workflow-section" id="experience">
+    <div class="workflow-heading reveal-copy">
+      <div><span class="section-kicker">The XIFI experience</span><h2>Automation with a human path built in.</h2></div>
+      <p>Every interaction stays grounded in approved information, constrained by policy, and ready to move to the right person with context intact.</p>
     </div>
     <WorkflowStack />
   </section>
 
-  <section class="cta-section" id="pilot" use:reveal>
-    <div class="cta-orbit cta-orbit-one"></div>
-    <div class="cta-orbit cta-orbit-two"></div>
-    <h2>Ready to elevate your<br />frontline support?</h2>
-    <p>Bring us one support journey worth improving.</p>
-    <button class="button button-light" on:click={openPilot}>Ask for a demo <Icon name="arrow" size={17} /></button>
+  <section class="cta-section" id="pilot" use:liquidGlass={{ size: 300 }}>
+    <div class="cta-glow" aria-hidden="true"></div>
+    <span class="section-kicker">Selected pilot engagements</span>
+    <h2>Ready to design your <em>pilot?</em></h2>
+    <p>Choose one queue or customer journey. We’ll scope the channels, policies, systems, human path, and proof plan together.</p>
+    <button class="button button-light" onclick={openPilot} use:liquidGlass={{ size: 130 }}>Design your pilot <Icon name="arrow" size={17} /></button>
   </section>
 
   <footer>
-    <div class="footer-brand"><Logo /><p>Grounded answers.<br />Approved actions.<br />Human when it matters.</p></div>
-    <div><strong>Product</strong><a href="#product">Overview</a><a href="#platform">AI frontline</a><a href="#integrations">Integrations</a></div>
-    <div><strong>Solutions</strong><a href="#solutions">Guided support</a><a href="#solutions">Ticket workflows</a><a href="#platform">Human handoff</a></div>
-    <div><strong>Trust</strong><a href="#product">Security approach</a><a href="#product">Data privacy</a><a href="#product">Responsible AI</a></div>
-    <div><strong>Company</strong><a href="#pilot">Pilot program</a><a href="mailto:hello@xifi.com">Contact</a><a href="#top">Back to top</a></div>
-    <div class="footer-bottom"><span>© 2026 XIFI. All rights reserved.</span><span>Selected pilot engagements.</span></div>
+    <div class="footer-brand"><Logo /><p>AI-native contact-center infrastructure for modern customer operations.</p></div>
+    <div><strong>Platform</strong><a href="#product">Service layers</a><a href="#model">Operating model</a><a href="#experience">Experience</a></div>
+    <div><strong>Use cases</strong><a href="#pilot">Selected queues</a><a href="#pilot">Guided resolution</a><a href="#pilot">Human handoff</a></div>
+    <div><strong>Company</strong><a href="#pilot">Pilot program</a><a href="mailto:hello@getxifi.com">Contact</a><a href="#top">Back to top</a></div>
+    <div class="footer-note"><strong>Product status</strong><p>XIFI is currently offered through selected, scoped pilot engagements.</p></div>
+    <div class="footer-bottom"><span>© 2026 XIFI. All rights reserved.</span><span>Simple. Controlled. Connected.</span></div>
   </footer>
 </main>
 
 {#if pilotOpen}
-  <div class="modal-backdrop" role="presentation" on:click={() => pilotOpen = false}>
-    <dialog open class="pilot-modal" aria-labelledby="pilot-title" on:click|stopPropagation>
-      <button class="modal-close" aria-label="Close" on:click={() => pilotOpen = false}><Icon name="close" /></button>
+  <div class="modal-backdrop" role="presentation" onclick={closePilot}>
+    <dialog open class="pilot-modal" aria-labelledby="pilot-title" onclick={(event) => event.stopPropagation()}>
+      <button class="modal-close" aria-label="Close" onclick={closePilot}><Icon name="close" /></button>
       {#if submitted}
         <span class="success-mark"><Icon name="check" size={28} /></span>
         <h2 id="pilot-title">Your journey is on our radar.</h2>
-        <p>We received your request and will contact you to discuss integrations, guardrails, and next steps.</p>
-        <button class="button button-primary button-full" on:click={() => pilotOpen = false}>Done</button>
+        <p>We received your request and will contact you to discuss scope, integrations, guardrails, and proof criteria.</p>
+        <button class="button button-primary button-full" onclick={closePilot}>Done</button>
       {:else}
         <Logo compact />
-        <h2 id="pilot-title">Bring us one journey worth improving.</h2>
-        <p>Tell us where your customers need a better first step.</p>
-        <form on:submit|preventDefault={submitPilot}>
+        <h2 id="pilot-title">Bring us one journey worth rebuilding.</h2>
+        <p>Start with a queue, a channel, and an outcome your team can measure.</p>
+        <form onsubmit={(event) => { event.preventDefault(); submitPilot(); }}>
           <label>Work email<input type="email" bind:value={email} placeholder="you@company.com" required /></label>
-          <label>Target support journey<textarea placeholder="For example: duplicate billing questions and refund handoff"></textarea></label>
+          <label>Target journey<textarea placeholder="For example: billing calls that require account verification, policy lookup, and specialist handoff"></textarea></label>
           <button class="button button-primary button-full" type="submit">Request a pilot conversation <Icon name="arrow" size={17} /></button>
         </form>
         <small>Do not include customer personal data or confidential production content.</small>
