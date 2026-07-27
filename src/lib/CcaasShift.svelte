@@ -1,10 +1,9 @@
 <script>
   import Icon from './Icon.svelte';
-  import { liquidGlass } from './liquidGlass.js';
 </script>
 
 <div class="shift-grid">
-  <article class="shift-card legacy" use:liquidGlass={{ size: 210 }}>
+  <article class="shift-card legacy">
     <header><span>Traditional CCaaS</span><small>Cloud delivery, fragmented intelligence</small></header>
     <div class="legacy-map" aria-label="A fragmented contact-center model">
       <span>Channels</span><span>IVR / routing</span><span>Knowledge</span>
@@ -16,7 +15,7 @@
 
   <div class="shift-arrow" aria-hidden="true"><Icon name="arrow" size={22} /></div>
 
-  <article class="shift-card xifi-shift" use:liquidGlass={{ size: 230 }}>
+  <article class="shift-card xifi-shift">
     <header><span>XIFI platform</span><small>AI-native, session-first orchestration</small></header>
     <div class="shift-content">
       <ul>

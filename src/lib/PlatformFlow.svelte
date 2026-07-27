@@ -1,6 +1,5 @@
 <script>
   import Icon from './Icon.svelte';
-  import { liquidGlass } from './liquidGlass.js';
 
   const layers = [
     {
@@ -32,7 +31,7 @@
 
 <div class="platform-flow">
   {#each layers as layer, index}
-    <article class="flow-layer" use:liquidGlass={{ size: 150 }}>
+    <article class="flow-layer">
       <header>
         <span class="flow-icon"><Icon name={layer.icon} size={22} /></span>
         <span class="flow-index">0{index + 1}</span>

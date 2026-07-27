@@ -8,7 +8,6 @@
   import PlatformFlow from './lib/PlatformFlow.svelte';
   import CcaasShift from './lib/CcaasShift.svelte';
   import WorkflowStack from './lib/WorkflowStack.svelte';
-  import { liquidGlass } from './lib/liquidGlass.js';
 
   let menuOpen = false;
   let pilotOpen = false;
@@ -160,18 +159,10 @@
   <meta name="description" content="XIFI is an AI-native contact-center platform designed to replace the traditional CCaaS operating model with first-party services for channels, orchestration, knowledge, actions, handoff, quality, and operations." />
 </svelte:head>
 
-<svg class="liquid-defs" aria-hidden="true" width="0" height="0">
-  <filter id="xifi-liquid-refraction" x="-30%" y="-30%" width="160%" height="160%">
-    <feTurbulence type="fractalNoise" baseFrequency="0.012 0.019" numOctaves="2" seed="41" result="noise" />
-    <feGaussianBlur in="noise" stdDeviation="1.2" result="softNoise" />
-    <feDisplacementMap in="SourceGraphic" in2="softNoise" scale="26" xChannelSelector="R" yChannelSelector="B" />
-  </filter>
-</svg>
-
 <div class="page-progress" aria-hidden="true"></div>
 
 <main id="top">
-  <nav class="floating-nav" aria-label="Main navigation" use:liquidGlass={{ size: 220 }}>
+  <nav class="floating-nav" aria-label="Main navigation">
     <Logo />
     <div class:open={menuOpen} class="nav-links">
       <a href="#product" onclick={() => menuOpen = false}>Platform</a>
@@ -179,7 +170,7 @@
       <a href="#experience" onclick={() => menuOpen = false}>Experience</a>
       <a href="#pilot" onclick={() => menuOpen = false}>Pilot</a>
     </div>
-    <button class="button button-primary nav-cta" onclick={openPilot} use:liquidGlass={{ size: 120 }}>Design your pilot <Icon name="arrow" size={16} /></button>
+    <button class="button button-primary nav-cta" onclick={openPilot}>Design your pilot <Icon name="arrow" size={16} /></button>
     <button class="menu-button" onclick={() => menuOpen = !menuOpen} aria-label="Toggle menu" aria-expanded={menuOpen}>
       <Icon name={menuOpen ? 'close' : 'menu'} />
     </button>
@@ -199,7 +190,7 @@
       </h1>
       <p>One system for voice, digital channels, intelligent routing, approved knowledge, controlled actions, human handoff, quality, and operations.</p>
       <div class="hero-actions">
-        <button class="button button-primary" onclick={openPilot} use:liquidGlass={{ size: 135 }}>Design your pilot <Icon name="arrow" size={17} /></button>
+        <button class="button button-primary" onclick={openPilot}>Design your pilot <Icon name="arrow" size={17} /></button>
         <a class="text-link" href="#product"><Icon name="play" size={18} /> See the platform in action</a>
       </div>
       <div class="hero-proof">
@@ -243,12 +234,12 @@
     <WorkflowStack />
   </section>
 
-  <section class="cta-section" id="pilot" use:liquidGlass={{ size: 300 }}>
+  <section class="cta-section" id="pilot">
     <div class="cta-glow" aria-hidden="true"></div>
     <span class="section-kicker">Selected pilot engagements</span>
     <h2>Ready to design your <em>pilot?</em></h2>
     <p>Choose one queue or customer journey. We’ll scope the channels, policies, systems, human path, and proof plan together.</p>
-    <button class="button button-light" onclick={openPilot} use:liquidGlass={{ size: 130 }}>Design your pilot <Icon name="arrow" size={17} /></button>
+    <button class="button button-light" onclick={openPilot}>Design your pilot <Icon name="arrow" size={17} /></button>
   </section>
 
   <footer>
